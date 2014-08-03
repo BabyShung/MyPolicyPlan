@@ -16,6 +16,9 @@ public class MyActivity extends Activity {
         setContentView(R.layout.activity_my);
 
 
+
+
+
 //
 //        ParseObject testObject = new ParseObject("TestObject");
 //        testObject.put("foo", "bar");
