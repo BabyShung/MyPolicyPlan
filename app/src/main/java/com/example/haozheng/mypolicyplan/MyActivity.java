@@ -4,22 +4,43 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
 
-
-
+import Objects.TestUser;
+import Objects.User;
+import validator.TestValidator;
 
 public class MyActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Parse.initialize(this, "StSG8dSOBAuifnwNj4nSh22ppKK6smU3Ayh8864t", "lYw5JetgqAcRM12QOURKjlguO0szzE52nBLP1Gdb");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        //User.register("maggie","12345","173267624@qq.com");
+        //TestUser tester = new TestUser();
+        //tester.testRegister("Jack","12345","173@yahoo.com");
+        //User.logIn("Jack", "12345");
+        User.changeUserName("Jerry");
 
-//
-//        ParseObject testObject = new ParseObject("TestObject");
-//        testObject.put("foo", "bar");
-//        testObject.saveInBackground();
+        //User.changeEmail("maggieyang829@gmail.com");
+        //User.resetPassword("maggieyang829@gmail.com");
+        User.description();
+
+        /* test Validator:
+        TestValidator tester = new TestValidator();
+        tester.test("maggie23@gmail.com");
+        tester.test("");
+        tester.test("m@gg@gma.cn"); */
+
+        /*ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();*/
+
     }
 
 

@@ -15,20 +15,19 @@ public class User {
     private static User instance;
     private String email;
     private String password;
+    private ParseUser user;
 
-    private User(String email, String psw){
-        this.email = email;
-        this.password = psw;
+    private User(){
     }
 
-    public static User getInstance(String email, String psw){
+    public static User getInstance(){
         if (instance == null){
-            User instance = new User(email, psw);
+            User instance = new User();
         }
         return instance;
     }
 
-    private static void register(String userName, String psw, String confirmPsw, String em){
+    public static void register(String userName, String psw, String em){
         /*we need to add logic to check the userName,
         psw matches confirmPsw, and turn on email verifying.*/
 
@@ -56,8 +55,8 @@ public class User {
         });
     }
 
-    private static void logIn(String em, String psw){
-        ParseUser.logInInBackground(em, psw, new LogInCallback() {
+    public static void logIn(String userName, String psw){
+        ParseUser.logInInBackground(userName, psw, new LogInCallback() {
             @Override
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null){
@@ -68,20 +67,26 @@ public class User {
             }
         });
     }
-    private void logOut(){
+    public static void logOut(){
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
     }
 
-    private void changeUserName(String newName){
+    public static void changeUserName(String newName){
         ParseUser user = ParseUser.getCurrentUser();
         if (user != null) {
             user.setUsername(newName);
             user.saveInBackground();
         }
     }
-
-    private void resetPassword(String email) {
+    public static void changeEmail(String newEmail){
+        ParseUser user = ParseUser.getCurrentUser();
+        if (user != null) {
+            user.setEmail(newEmail);
+            user.saveInBackground();
+        }
+    }
+    public static void resetPassword(String email) {
         //we first asks the user to input the registered email
         String userEmail = email;
 
@@ -99,6 +104,15 @@ public class User {
     }
 
     private void fetchPlan() {
+    }
+
+    public static String description(){
+        ParseUser user = ParseUser.getCurrentUser();
+        if (user != null) {
+            System.out.println(user.getUsername());
+            return "the user's name is " + user.getUsername() + "\n"+
+                    "the user's email is " + user.getEmail();
+        } else {return "No current user!";}
     }
 
 }
