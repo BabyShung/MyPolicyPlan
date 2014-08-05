@@ -30,7 +30,7 @@ public class MyActivity extends Activity {
         //User.changeEmail("maggieyang829@gmail.com");
         //User.resetPassword("maggieyang829@gmail.com");
         User.description();
-
+        
         /* test Validator:
         TestValidator tester = new TestValidator();
         tester.test("maggie23@gmail.com");
@@ -40,6 +40,11 @@ public class MyActivity extends Activity {
         /*ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();*/
+
+//
+//        ParseObject testObject = new ParseObject("TestObject");
+//        testObject.put("foo", "bar");
+//        testObject.saveInBackground();
 
     }
 
