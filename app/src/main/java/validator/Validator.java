@@ -20,4 +20,32 @@ public class Validator {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    public boolean validateEmailRequire(String email) {
+        if (email == "") return false;
+        return true;
+    }
+
+    public boolean validatePswRequire(String password) {
+        if (password == "") return false;
+        return true;
+    }
+
+    public boolean verifyAll(String email, String psw){
+        if (!validateEmailRequire(email)){
+            System.out.println("Please input your email");
+            return false;
+        }
+        if (!validatePswRequire(psw)){
+            System.out.println("Please input your password");
+            return false;
+        }
+
+       if (!validate(email)){
+           System.out.println("Please input a valid email address");
+           return false;
+       }
+        System.out.println("verification success");
+        return true;
+    }
 }

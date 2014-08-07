@@ -10,9 +10,7 @@ public class TestValidator {
         validator = new Validator();
     }
 
-    public void test(String email){
-        Boolean res = validator.validate(email);
-        String isValid = (res)? "valid":"invalid";
-        System.out.println(email + " is " + isValid);
+    public void test(String email, String psw){
+        validator.verifyAll(email, psw);
     }
 }

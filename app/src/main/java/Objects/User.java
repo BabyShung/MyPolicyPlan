@@ -1,5 +1,8 @@
 package Objects;
 
+import android.content.Intent;
+
+import com.example.haozheng.mypolicyplan.LoginSuccess;
 import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
@@ -8,6 +11,8 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
+
+import validator.Validator;
 
 //Parse.initialize(this, "StSG8dSOBAuifnwNj4nSh22ppKK6smU3Ayh8864t", "lYw5JetgqAcRM12QOURKjlguO0szzE52nBLP1Gdb");
 
@@ -56,16 +61,25 @@ public class User {
     }
 
     public static void logIn(String userName, String psw){
-        ParseUser.logInInBackground(userName, psw, new LogInCallback() {
-            @Override
-            public void done(ParseUser parseUser, ParseException e) {
-                if (parseUser != null){
-                    System.out.println("login success!Let the user use the app!");
-                } else {
-                    System.out.println("login failed! check exception.");
+        Validator validator = new Validator();
+        Boolean done = validator.verifyAll(userName, psw);
+        if (!done) {
+            System.out.println("Login failed");
+            return;
+        } else {
+            ParseUser.logInInBackground(userName, psw, new LogInCallback() {
+                @Override
+                public void done(ParseUser parseUser, ParseException e) {
+                    if (parseUser != null) {
+                        System.out.println("login success!Let the user use the app!");
+                        Intent getLoginOKScreen = new Intent(this,LoginSuccess.class);
+
+                    } else {
+                        System.out.println("login failed! check exception.");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     public static void logOut(){
         ParseUser.logOut();

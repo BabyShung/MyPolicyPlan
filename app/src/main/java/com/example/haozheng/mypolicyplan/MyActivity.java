@@ -1,9 +1,13 @@
 package com.example.haozheng.mypolicyplan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -12,6 +16,7 @@ import com.parse.ParseUser;
 import Objects.TestUser;
 import Objects.User;
 import validator.TestValidator;
+import validator.Validator;
 
 public class MyActivity extends Activity {
 
@@ -21,27 +26,24 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        //User.register("maggie","12345","173267624@qq.com");
+        //User.register("12345@today.cn","12345","12345@today.cn");
         //TestUser tester = new TestUser();
         //tester.testRegister("Jack","12345","173@yahoo.com");
         //User.logIn("Jack", "12345");
-        User.changeUserName("Jerry");
-
+        //User.changeUserName("Jerry");
         //User.changeEmail("maggieyang829@gmail.com");
         //User.resetPassword("maggieyang829@gmail.com");
-        User.description();
-        
-        /* test Validator:
-        TestValidator tester = new TestValidator();
-        tester.test("maggie23@gmail.com");
-        tester.test("");
-        tester.test("m@gg@gma.cn"); */
+        //User.description();
+
+        //Validator v = new Validator();
+        //System.out.println(v.validateEmailRequire(""));
+        //System.out.println(v.validatePswRequire(""));
+        //v.verifyAll("maggi@yah.com","56");
 
         /*ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();*/
 
-//
 //        ParseObject testObject = new ParseObject("TestObject");
 //        testObject.put("foo", "bar");
 //        testObject.saveInBackground();
@@ -66,5 +68,13 @@ public class MyActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onLoginClick(View view) {
+        EditText userEmailET = (EditText)findViewById(R.id.user_email);
+        EditText userPswET = (EditText)findViewById(R.id.password);
+        String userEmail = String.valueOf(userEmailET.getText());
+        String userPsw = String.valueOf(userPswET.getText());
+        User.logIn(userEmail,userPsw);
     }
 }

@@ -4,5 +4,10 @@
     <string name="app_name">MyPolicyPlan</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="forget_password_text">Forget password?</string>
+    <string name="Click_here_text">  Click here</string>
+    <string name="user_password_hint">Password</string>
+    <string name="user_email_hint_text">Email</string>
+
 
 </resources>
