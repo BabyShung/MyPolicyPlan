@@ -60,7 +60,7 @@ public class User {
         });
     }
 
-    public static void logIn(String userName, String psw){
+    public static void logIn(String userName, String psw, final LoginCallBack lcb){
         Validator validator = new Validator();
         Boolean done = validator.verifyAll(userName, psw);
         if (!done) {
@@ -72,14 +72,15 @@ public class User {
                 public void done(ParseUser parseUser, ParseException e) {
                     if (parseUser != null) {
                         System.out.println("login success!Let the user use the app!");
-                        Intent getLoginOKScreen = new Intent(this,LoginSuccess.class);
-
+                        lcb.finish(true, null);
                     } else {
                         System.out.println("login failed! check exception.");
+                        lcb.finish(false, e);
                     }
                 }
             });
         }
+
     }
     public static void logOut(){
         ParseUser.logOut();

@@ -1,6 +1,8 @@
 package com.example.haozheng.mypolicyplan;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import Objects.LoginCallBack;
 import Objects.TestUser;
 import Objects.User;
 import validator.TestValidator;
@@ -73,8 +76,28 @@ public class MyActivity extends Activity {
     public void onLoginClick(View view) {
         EditText userEmailET = (EditText)findViewById(R.id.user_email);
         EditText userPswET = (EditText)findViewById(R.id.password);
+
         String userEmail = String.valueOf(userEmailET.getText());
         String userPsw = String.valueOf(userPswET.getText());
-        User.logIn(userEmail,userPsw);
+
+        User.logIn(userEmail,userPsw,new LoginCallBack() {
+            @Override
+            public void finish(Boolean success, ParseException error) {
+                if (success){
+                    Intent getLoginOKScreen = new Intent(getBaseContext(), LoginSuccess.class);
+                    startActivity(getLoginOKScreen);
+                } else {
+                    AlertDialog alert = new AlertDialog.Builder(getBaseContext()).create();
+                    alert.setTitle("Login Alert");
+                    alert.setMessage("Login failed");
+                    alert.setButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                    });
+                    alert.show();
+                }
+            }
+        });
     }
 }

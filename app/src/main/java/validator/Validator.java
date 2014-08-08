@@ -15,19 +15,17 @@ public class Validator {
     }
 
     public boolean validate(final String email) {
-
-        if (email == null) {return false;}
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
     public boolean validateEmailRequire(String email) {
-        if (email == "") return false;
+        if (email.isEmpty()) return false;
         return true;
     }
 
     public boolean validatePswRequire(String password) {
-        if (password == "") return false;
+        if (password.isEmpty()) return false;
         return true;
     }
 

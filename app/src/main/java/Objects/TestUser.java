@@ -16,7 +16,12 @@ public class TestUser {
     }
 
     public void testLogIn(String email, String psw) throws ParseException {
-        User.logIn(email,psw);
+        User.logIn(email,psw,new LoginCallBack() {
+            @Override
+            public void finish(Boolean success, ParseException error) {
+
+            }
+        });
     }
     public void testChangeUserName(String newName){}
     public void testResetPassword(){}
