@@ -23,15 +23,18 @@ import validator.Validator;
 
 public class MyActivity extends Activity {
 
+    private EditText userEmailET;
+    private EditText userPswET;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Parse.initialize(this, "StSG8dSOBAuifnwNj4nSh22ppKK6smU3Ayh8864t", "lYw5JetgqAcRM12QOURKjlguO0szzE52nBLP1Gdb");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        //put all the init,findById here
+        initiateComponents();
 
-//        getBaseContext();
-//        this.getApplicationContext();
 
         //User.register("12345@today.cn","12345","12345@today.cn");
         //TestUser tester = new TestUser();
@@ -55,8 +58,14 @@ public class MyActivity extends Activity {
 //        testObject.put("foo", "bar");
 //        testObject.saveInBackground();
 
+
     }
 
+    private void initiateComponents(){
+        userEmailET = (EditText)findViewById(R.id.user_email);
+        userPswET = (EditText)findViewById(R.id.password);
+        //....
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,8 +87,6 @@ public class MyActivity extends Activity {
     }
 
     public void onLoginClick(View view) {
-        EditText userEmailET = (EditText)findViewById(R.id.user_email);
-        EditText userPswET = (EditText)findViewById(R.id.password);
 
         String userEmail = String.valueOf(userEmailET.getText());
         String userPsw = String.valueOf(userPswET.getText());
@@ -87,21 +94,33 @@ public class MyActivity extends Activity {
         User.logIn(userEmail,userPsw,new LoginCallBack() {
             @Override
             public void finish(Boolean success, ParseException error) {
+
                 if (success){
                     Intent getLoginOKScreen = new Intent(getBaseContext(), LoginSuccess.class);
                     startActivity(getLoginOKScreen);
+
                 } else {
-                    AlertDialog alert = new AlertDialog.Builder(getBaseContext()).create();
-                    alert.setTitle("Login Alert");
-                    alert.setMessage("Login failed");
-                    alert.setButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                    });
-                    alert.show();
+                    showAlertMessage("User name or password incorrect.");
                 }
             }
         });
     }
+
+    //encapsulate this method into another related class (maybe called GeneralControl.java,
+    // its methods should be static
+
+    private void showAlertMessage(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder((Activity)this);
+        builder.setTitle("ALERTTILESTRING")
+                .setMessage(msg)
+                .setCancelable(false)
+                .setNegativeButton("Close",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 }

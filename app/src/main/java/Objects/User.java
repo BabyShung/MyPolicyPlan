@@ -2,12 +2,8 @@ package Objects;
 
 import android.content.Intent;
 
-import com.example.haozheng.mypolicyplan.LoginSuccess;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
