@@ -50,10 +50,10 @@ public class User {
         user.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
-                if (e == null){
+                if (e == null) {
                     System.out.println("Sign up success!Let the user use the app!");
 
-                }else {
+                } else {
                     System.out.println("Sign up failed! check exception.");
                 }
             }

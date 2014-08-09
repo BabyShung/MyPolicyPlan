@@ -29,6 +29,10 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+
+//        getBaseContext();
+//        this.getApplicationContext();
+
         //User.register("12345@today.cn","12345","12345@today.cn");
         //TestUser tester = new TestUser();
         //tester.testRegister("Jack","12345","173@yahoo.com");
