@@ -97,22 +97,22 @@ public class User {
             user.saveInBackground();
         }
     }
-    public static void resetPassword(String email) {
-        //we first asks the user to input the registered email
+    public static void resetPassword(String email, final LoginCallBack cb) {
         String userEmail = email;
-
-        //we need turn on the email verification on from the dashboard on Parse.com.
         ParseUser.requestPasswordResetInBackground(userEmail, new RequestPasswordResetCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {
                     System.out.println("email is sent with reset instruction");
+                    cb.finish(true,null);
                 } else {
-                    System.out.println("something is wrong, check e");
+                    System.out.println("Reset password failed, check e");
+                    cb.finish(false,e);
                 }
             }
         });
     }
+
 
     private void fetchPlan() {
     }

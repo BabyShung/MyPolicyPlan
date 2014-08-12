@@ -23,6 +23,9 @@
         <activity
             android:name=".LoginSuccess"
             android:label="loginOK"/>
+
+        <activity android:name=".GetUserEmail"
+            android:label="getPassword"/>
     </application>
 
 </manifest>

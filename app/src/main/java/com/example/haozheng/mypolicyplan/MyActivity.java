@@ -15,6 +15,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import Objects.AlertMessage;
 import Objects.LoginCallBack;
 import Objects.TestUser;
 import Objects.User;
@@ -35,11 +36,10 @@ public class MyActivity extends Activity {
         //put all the init,findById here
         initiateComponents();
 
-
         //User.register("12345@today.cn","12345","12345@today.cn");
         //TestUser tester = new TestUser();
         //tester.testRegister("Jack","12345","173@yahoo.com");
-        //User.logIn("Jack", "12345");
+        //User.logIn("12345@today.cn", "12345",null);
         //User.changeUserName("Jerry");
         //User.changeEmail("maggieyang829@gmail.com");
         //User.resetPassword("maggieyang829@gmail.com");
@@ -57,7 +57,6 @@ public class MyActivity extends Activity {
 //        ParseObject testObject = new ParseObject("TestObject");
 //        testObject.put("foo", "bar");
 //        testObject.saveInBackground();
-
 
     }
 
@@ -87,10 +86,8 @@ public class MyActivity extends Activity {
     }
 
     public void onLoginClick(View view) {
-
         String userEmail = String.valueOf(userEmailET.getText());
         String userPsw = String.valueOf(userPswET.getText());
-
         User.logIn(userEmail,userPsw,new LoginCallBack() {
             @Override
             public void finish(Boolean success, ParseException error) {
@@ -100,7 +97,9 @@ public class MyActivity extends Activity {
                     startActivity(getLoginOKScreen);
 
                 } else {
-                    showAlertMessage("User name or password incorrect.");
+                    AlertMessage.showAlertMessage("Login Error",
+                            "User name or password incorrect.",
+                            MyActivity.this);
                 }
             }
         });
@@ -109,9 +108,9 @@ public class MyActivity extends Activity {
     //encapsulate this method into another related class (maybe called GeneralControl.java,
     // its methods should be static
 
-    private void showAlertMessage(String msg){
+    /*private void showAlertMessage(String alertTitle, String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder((Activity)this);
-        builder.setTitle("ALERTTILESTRING")
+        builder.setTitle(alertTitle)
                 .setMessage(msg)
                 .setCancelable(false)
                 .setNegativeButton("Close",new DialogInterface.OnClickListener() {
@@ -121,6 +120,10 @@ public class MyActivity extends Activity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
-    }
+    }*/
 
+    public void onClickForgetPsw(View view) {
+        Intent getEmailScreen = new Intent(getBaseContext(),GetUserEmail.class);
+        startActivity(getEmailScreen);
+    }
 }

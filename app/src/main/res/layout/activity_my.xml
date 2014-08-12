@@ -68,7 +68,7 @@
         android:layout_alignEnd="@+id/password"
         android:layout_toRightOf="@+id/forget_password"
         android:clickable="true"
-        android:onClick="onClick"
+        android:onClick="onClickForgetPsw"
         android:linksClickable="true"
         android:textColor="#ff1841ff" />
 
