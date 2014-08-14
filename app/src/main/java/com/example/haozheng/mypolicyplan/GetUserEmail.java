@@ -19,6 +19,7 @@ public class GetUserEmail extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.get_user_email_screen);
+
     }
 
     private void initiateComponents(){
