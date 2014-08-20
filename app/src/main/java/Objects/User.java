@@ -1,11 +1,7 @@
 package Objects;
 
-import android.content.Intent;
-
-import com.example.haozheng.mypolicyplan.LoginSuccess;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -13,7 +9,6 @@ import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import validator.Validator;
@@ -25,7 +20,6 @@ public class User {
     private String email;
     private String password;
     private ParseUser user;
-    public static List<ParseObject> myPlanList;
 
     private User(){
     }
@@ -89,7 +83,6 @@ public class User {
     }
     public static void logOut(){
         ParseUser.logOut();
-        ParseUser currentUser = ParseUser.getCurrentUser();
     }
 
     public static void changeUserName(String newName){
@@ -138,9 +131,7 @@ public class User {
             public void done(List<ParseObject> policyObjects, ParseException e) {
                 if (e == null) {
                     fcb.finish(true, policyObjects, null);
-                    /*for (ParseObject po : policyObjects) {
-                        System.out.println(po.getString("policyName"));
-                    }*/
+
                 } else {
                     fcb.finish(false, null, e);
                     System.out.println("fetch plan failed with exception:  " + e.getMessage());
@@ -149,7 +140,8 @@ public class User {
         });
     }
 
-    public static String description(){
+    @Override
+    public String toString(){
         ParseUser user = ParseUser.getCurrentUser();
         if (user != null) {
             System.out.println(user.getUsername());

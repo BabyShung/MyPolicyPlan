@@ -9,9 +9,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name=".MyApp">
         <activity
-            android:name=".MyActivity"
+            android:name=".LogInActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,7 @@
         </activity>
 
         <activity
-            android:name=".LoginSuccess"
+            android:name=".MyPolicyView"
             android:label="loginOK"/>
 
         <activity android:name=".GetUserEmail"

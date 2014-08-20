@@ -3,6 +3,11 @@
     tools:context=".MyActivity" >
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         android:showAsAction="never" />
+
+    <item android:id="@+id/action_LogOut"
+        android:title="Log out"
+        android:orderInCategory="100"/>
+
 </menu>

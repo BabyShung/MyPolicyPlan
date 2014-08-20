@@ -1,11 +1,7 @@
 package validator;
 
-import com.example.haozheng.mypolicyplan.MyActivity;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import Objects.AlertMessage;
 
 public class Validator {
     private Pattern pattern;
