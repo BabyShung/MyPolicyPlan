@@ -1,5 +1,6 @@
 package Objects;
 
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
@@ -20,6 +21,7 @@ public class User {
     private String email;
     private String password;
     private ParseUser user;
+    static final String queryResult = "planQueryResult";
 
     private User(){
     }
@@ -123,13 +125,27 @@ public class User {
         ParseQuery<ParseObject> innerQuery = ParseQuery.getQuery("UserPolicy");
         innerQuery.whereEqualTo("UserObjectID", userID);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Policy");
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("Policy");
         query.whereMatchesKeyInQuery("objectId","PolicyObjectID",innerQuery);
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> policyObjects, ParseException e) {
+            public void done(final List<ParseObject> policyObjects, ParseException e) {
                 if (e == null) {
+                    /*ParseObject.unpinAllInBackground(queryResult,policyObjects,
+                            new DeleteCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e!= null) {
+                                        System.out.println("unpin query failed");
+                                        return;
+                                    } else {
+                                        ParseObject.pinAllInBackground(queryResult, policyObjects);
+                                        System.out.println("pin query success");
+                                    }
+                                }
+                            });*/
+                    //ParseObject.pinAllInBackground(queryResult, policyObjects);
                     fcb.finish(true, policyObjects, null);
 
                 } else {
@@ -138,6 +154,13 @@ public class User {
                 }
             }
         });
+    }
+
+    public static Boolean hasCurrentUser() {
+        ParseUser currUser = ParseUser.getCurrentUser();
+        if (currUser != null) { return true;}
+
+        return false;
     }
 
     @Override

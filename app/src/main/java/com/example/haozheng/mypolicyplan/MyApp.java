@@ -3,9 +3,10 @@ package com.example.haozheng.mypolicyplan;
 import android.app.Application;
 
 import com.parse.Parse;
-import com.parse.ParseUser;
 
 import java.util.Date;
+
+import Objects.User;
 
 public class MyApp extends Application{
     private Boolean hasCurrentUser;
@@ -15,20 +16,15 @@ public class MyApp extends Application{
 
     @Override
     public void onCreate(){
+        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "StSG8dSOBAuifnwNj4nSh22ppKK6smU3Ayh8864t", "lYw5JetgqAcRM12QOURKjlguO0szzE52nBLP1Gdb");
         super.onCreate();
 
-        hasCurrent();
     }
 
     public Boolean hasCurrent(){
-        ParseUser currUser = ParseUser.getCurrentUser();
-        if (currUser != null) {
-            hasCurrentUser = true;
-        } else {
-            hasCurrentUser = false;
-        }
-        return hasCurrentUser;
+        return User.hasCurrentUser();
+
     }
 
 

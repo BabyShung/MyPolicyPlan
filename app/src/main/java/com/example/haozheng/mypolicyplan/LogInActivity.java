@@ -38,7 +38,6 @@ public class LogInActivity extends Activity {
         if (app.hasCurrent()){
 
             ParseUser currUser = ParseUser.getCurrentUser();
-
             userDateInDevice = currUser.getDate("checkDeviceDate");
 
             String currUserObjectId = currUser.getObjectId();
@@ -63,10 +62,6 @@ public class LogInActivity extends Activity {
                 }
             });
 
-
-            //Intent goToPlan = new Intent(this,MyPolicyView.class);
-            //startActivity(goToPlan);
-            //finish();
         } else {
 
             setContentView(R.layout.activity_my);
@@ -113,31 +108,10 @@ public class LogInActivity extends Activity {
                     currUser.put("checkDeviceDate", new Date());
                     currUser.saveInBackground();
 
-                   /* ParseObject localUser = new ParseObject("User");
-
-                    localUser.put("objectId", currUser.getObjectId());
-                    localUser.put("username", currUser.getUsername());
-                    localUser.put("checkDeviceDate",currUser.getDate("checkDeviceDate"));
-                    localUser.put("AppUserName", currUser.getString("AppUserName"));
-
-                    localUser.pinInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            if (e == null){
-                                System.out.println("pin user success");
-                            } else {
-                                System.out.println("error:" + e.getMessage());
-                            }
-                        }
-                    });
-
-                    currUser.saveEventually(); */
-
                     Intent getLoginOKScreen = new Intent(getBaseContext(), MyPolicyView.class);
                     getLoginOKScreen.putExtra("secondLoginInfo",false);
 
                     startActivity(getLoginOKScreen);
-
                     LogInActivity.this.finish();
                 } else {
                     AlertMessage.showAlertMessage("Login Error",
